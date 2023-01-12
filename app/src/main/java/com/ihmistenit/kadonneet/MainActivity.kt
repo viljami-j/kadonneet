@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
@@ -29,23 +30,22 @@ class MainActivity : AppCompatActivity() {
     lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    lateinit var mapView: MapView
-    lateinit var map: GoogleMap
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.drawerLayout.findViewById(R.id.toolbar))
 
         // Default fragment
         val ftr: FragmentTransaction = supportFragmentManager.beginTransaction()
         ftr.replace(R.id.tabContentFragmentPlaceholder, ScrollingFragment()).commit()
 
+        val toolbar: Toolbar = binding.drawerLayout.findViewById(R.id.toolbar)
+
         drawerLayout = findViewById(R.id.drawer_layout)
-        actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout,  R.string.nav_open, R.string.nav_close)
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar,  R.string.nav_open, R.string.nav_close)
+        setSupportActionBar(toolbar)
+        drawerLayout.addDrawerListener(actionBarDrawerToggle)
         actionBarDrawerToggle.syncState();
 
         // to make the Navigation drawer icon always appear on the action bar
