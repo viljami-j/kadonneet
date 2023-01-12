@@ -3,15 +3,17 @@ package com.ihmistenit.kadonneet
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -27,14 +29,16 @@ class MainActivity : AppCompatActivity() {
     lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+    lateinit var mapView: MapView
+    lateinit var map: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.drawerLayout.findViewById(R.id.toolbar))
+
         drawerLayout = findViewById(R.id.drawer_layout)
         actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout,  R.string.nav_open, R.string.nav_close)
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
@@ -43,7 +47,6 @@ class MainActivity : AppCompatActivity() {
         // to make the Navigation drawer icon always appear on the action bar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val tabs: TabLayout = binding.tabs
         val fab: FloatingActionButton = binding.fab
 
         fab.setOnClickListener { view ->
@@ -62,27 +65,26 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        // Setup tabs
         val tabLayout = binding.tabs
-
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_text_1)))
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_text_2)))
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
 
         tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                if (tabLayout.selectedTabPosition === 0) {
-
-                } else if (tabLayout.selectedTabPosition === 1) {
-
+                if (tabLayout.selectedTabPosition == 0) {
+                    val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+                    ft.replace(R.id.tabContentFragmentPlaceholder, ScrollingFragment()).commit()
+                } else if (tabLayout.selectedTabPosition == 1) {
+                    val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+                    ft.replace(R.id.tabContentFragmentPlaceholder, MapsFragment()).commit()
                 }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
-
-        drawerLayout.closeDrawers()
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
