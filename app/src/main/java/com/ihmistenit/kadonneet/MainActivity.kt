@@ -3,6 +3,7 @@ package com.ihmistenit.kadonneet
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -11,13 +12,12 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.viewpager.widget.ViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.ihmistenit.kadonneet.databinding.ActivityMainBinding
-import com.ihmistenit.kadonneet.ui.main.SectionsPagerAdapter
 
 
 class MainActivity : AppCompatActivity() {
@@ -43,11 +43,7 @@ class MainActivity : AppCompatActivity() {
         // to make the Navigation drawer icon always appear on the action bar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
-        val viewPager: ViewPager = binding.viewPager
-        viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = binding.tabs
-        tabs.setupWithViewPager(viewPager)
         val fab: FloatingActionButton = binding.fab
 
         fab.setOnClickListener { view ->
@@ -66,9 +62,24 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        val tabLayout = binding.tabLayout
+        val tabLayout = binding.tabs
 
-        tabLayout.setupWithViewPager(viewPager)
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_text_1)))
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_text_2)))
+        tabLayout.tabGravity = TabLayout.GRAVITY_FILL
+
+        tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                if (tabLayout.selectedTabPosition === 0) {
+
+                } else if (tabLayout.selectedTabPosition === 1) {
+
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
 
         drawerLayout.closeDrawers()
 
