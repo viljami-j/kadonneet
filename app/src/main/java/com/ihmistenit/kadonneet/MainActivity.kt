@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         // Default fragment
         val ftr: FragmentTransaction = supportFragmentManager.beginTransaction()
-        ftr.replace(R.id.tabContentFragmentPlaceholder, ScrollingFragment()).commit()
+        ftr.replace(R.id.tabContentFragmentPlaceholder, PostItemFragment()).commit()
 
         val toolbar: Toolbar = binding.drawerLayout.findViewById(R.id.toolbar)
 
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 if (tabLayout.selectedTabPosition == 0) {
                     val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-                    ft.replace(R.id.tabContentFragmentPlaceholder, ScrollingFragment()).commit()
+                    ft.replace(R.id.tabContentFragmentPlaceholder, PostItemFragment()).commit()
                 } else if (tabLayout.selectedTabPosition == 1) {
                     val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
                     ft.replace(R.id.tabContentFragmentPlaceholder, MapsFragment()).commit()
