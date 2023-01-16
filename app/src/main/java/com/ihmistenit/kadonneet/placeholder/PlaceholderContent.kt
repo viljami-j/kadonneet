@@ -43,7 +43,7 @@ object PlaceholderContent {
     /**
      * A placeholder item representing a piece of content.
      */
-    data class UserAdvertItem(val id: String, val content: String, val image: Bitmap?) {
-        override fun toString(): String = content
+    data class UserAdvertItem(val id: String, val advertTitle: String, val image: Bitmap?) {
+        override fun toString(): String = advertTitle
     }
 }

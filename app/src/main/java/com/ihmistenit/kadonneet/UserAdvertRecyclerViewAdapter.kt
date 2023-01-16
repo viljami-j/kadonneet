@@ -29,17 +29,18 @@ class UserAdvertRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.contentView.text = item.content
+        holder.advertTitleView.text = item.advertTitle
     }
 
     override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(binding: FragmentUserAdvertItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val contentView: TextView = binding.content
+        val advertTitleView: TextView = binding.advertTitle
+        val advertPostDateView: TextView = binding.advertPostdate
 
         override fun toString(): String {
-            return super.toString() + " '" + contentView.text + "'"
+            return super.toString() + " '" + advertTitleView.text + "'"
         }
     }
 
