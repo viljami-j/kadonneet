@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentTransaction
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.tabs.TabLayout
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,16 +33,70 @@ class UserAdvertsFragment : Fragment() {
         }
     }
 
+    private fun initUserAdvertListFragment() {
+        val name = UserAdvertListFragment::class.java.name
+        if (activity?.supportFragmentManager?.findFragmentByTag(name) == null) {
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.add(R.id.tabContentFragContainer, UserAdvertListFragment(), name)
+                ?.addToBackStack(name)
+                ?.commit()
+        }
+    }
+
+    private fun initMapsFragment() {
+        val name = MapsFragment::class.java.name
+        if (activity?.supportFragmentManager?.findFragmentByTag(name) == null) {
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.add(R.id.tabContentFragContainer, MapsFragment(), name)
+                ?.addToBackStack(name)
+                ?.commit()
+        }
+    }
+
+    private fun initTabs(tabLayout: TabLayout) {
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_text_1)))
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_text_2)))
+        tabLayout.tabGravity = TabLayout.GRAVITY_FILL
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                if (tabLayout.selectedTabPosition == 0) {
+                    val ft: FragmentTransaction? = activity?.supportFragmentManager?.beginTransaction()
+                    val frag: Fragment? = activity?.supportFragmentManager?.findFragmentByTag(UserAdvertListFragment::class.java.name)
+                    if (frag != null) {
+                        ft?.replace(R.id.tabContentFragContainer, frag)?.commit()
+                    }
+                } else if (tabLayout.selectedTabPosition == 1) {
+                    val ft: FragmentTransaction? = activity?.supportFragmentManager?.beginTransaction()
+                    val frag: Fragment? = activity?.supportFragmentManager?.findFragmentByTag(MapsFragment::class.java.name)
+                    if (frag != null) {
+                        ft?.replace(R.id.tabContentFragContainer, frag)?.commit()
+                    } else initMapsFragment()
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view: View = inflater.inflate(R.layout.fragment_user_adverts, container, false)
+        val rootView: View = inflater.inflate(R.layout.fragment_user_adverts, container, false)
 
+        initUserAdvertListFragment()
+        initTabs(rootView.findViewById(R.id.tabs))
 
+        val fab: FloatingActionButton = rootView.findViewById(R.id.fab)
+        fab.bringToFront()
+        fab.setOnClickListener { view ->
+            Snackbar.make(rootView, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+        }
 
-        return view
+        return rootView
     }
 
     companion object {

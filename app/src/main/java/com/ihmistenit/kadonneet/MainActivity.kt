@@ -31,52 +31,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    private fun initUserAdvertListFragment() {
-        val name = UserAdvertListFragment::class.java.name
-        if (supportFragmentManager.findFragmentByTag(name) == null) {
-            supportFragmentManager.beginTransaction()
-                .add(R.id.tabContentFragContainer, UserAdvertListFragment(), name)
-                .addToBackStack(name)
-                .commit()
-        }
-    }
 
-    private fun initMapsFragment() {
-        val name = MapsFragment::class.java.name
-        if (supportFragmentManager.findFragmentByTag(name) == null) {
-            supportFragmentManager.beginTransaction()
-                .add(R.id.tabContentFragContainer, MapsFragment(), name)
-                .addToBackStack(name)
-                .commit()
-        }
-    }
-
-    private fun initTabs() {
-        val tabLayout = binding.tabs
-        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_text_1)))
-        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_text_2)))
-        tabLayout.tabGravity = TabLayout.GRAVITY_FILL
-        tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                if (tabLayout.selectedTabPosition == 0) {
-                    val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-                    val frag: Fragment? = supportFragmentManager.findFragmentByTag(UserAdvertListFragment::class.java.name)
-                    if (frag != null) {
-                        ft.replace(R.id.tabContentFragContainer, frag).commit()
-                    }
-                } else if (tabLayout.selectedTabPosition == 1) {
-                    val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-                    val frag: Fragment? = supportFragmentManager.findFragmentByTag(MapsFragment::class.java.name)
-                    if (frag != null) {
-                        ft.replace(R.id.tabContentFragContainer, frag).commit()
-                    } else initMapsFragment()
-                }
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {}
-            override fun onTabReselected(tab: TabLayout.Tab) {}
-        })
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,9 +39,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initUserAdvertListFragment()
 
-        val test = supportFragmentManager.findFragmentByTag(UserAdvertListFragment.javaClass.simpleName)
+        val test = supportFragmentManager.findFragmentByTag(UserAdvertListFragment::class.java.name)
         if (test == null) println("elontusk")
 
         val userAdvertRecyclerView: RecyclerView? = supportFragmentManager.findFragmentById(R.id.tabContentFragContainer)?.view?.findViewById(R.id.user_advert_recyclerview)
@@ -107,13 +61,6 @@ class MainActivity : AppCompatActivity() {
         // to make the Navigation drawer icon always appear on the action bar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val fab: FloatingActionButton = binding.fab
-        fab.bringToFront()
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment_app_bar)
@@ -124,8 +71,6 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        initTabs()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
