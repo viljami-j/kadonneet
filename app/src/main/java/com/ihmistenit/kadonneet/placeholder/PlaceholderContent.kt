@@ -1,5 +1,6 @@
 package com.ihmistenit.kadonneet.placeholder
 
+import android.graphics.Bitmap
 import java.util.ArrayList
 import java.util.HashMap
 
@@ -14,44 +15,35 @@ object PlaceholderContent {
     /**
      * An array of sample (placeholder) items.
      */
-    val ITEMS: MutableList<PlaceholderItem> = ArrayList()
+    val ITEMS: MutableList<UserAdvertItem> = ArrayList()
 
     /**
      * A map of sample (placeholder) items, by ID.
      */
-    val ITEM_MAP: MutableMap<String, PlaceholderItem> = HashMap()
+    val ITEM_MAP: MutableMap<String, UserAdvertItem> = HashMap()
 
-    private val COUNT = 25
+    val COUNT = 25
 
     init {
         // Add some sample items.
         for (i in 1..COUNT) {
-            addItem(createPlaceholderItem(i))
+            addItem(createUserAdvertItem(i))
         }
     }
 
-    private fun addItem(item: PlaceholderItem) {
+    private fun addItem(item: UserAdvertItem) {
         ITEMS.add(item)
-        ITEM_MAP.put(item.id, item)
+        ITEM_MAP[item.id] = item
     }
 
-    private fun createPlaceholderItem(position: Int): PlaceholderItem {
-        return PlaceholderItem(position.toString(), "Item " + position, makeDetails(position))
-    }
-
-    private fun makeDetails(position: Int): String {
-        val builder = StringBuilder()
-        builder.append("Details about Item: ").append(position)
-        for (i in 0..position - 1) {
-            builder.append("\nMore details information here.")
-        }
-        return builder.toString()
+    private fun createUserAdvertItem(position: Int): UserAdvertItem {
+        return UserAdvertItem(position.toString(), "Item " + position, null)
     }
 
     /**
      * A placeholder item representing a piece of content.
      */
-    data class PlaceholderItem(val id: String, val content: String, val details: String) {
+    data class UserAdvertItem(val id: String, val content: String, val image: Bitmap?) {
         override fun toString(): String = content
     }
 }

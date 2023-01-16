@@ -13,7 +13,7 @@ import com.ihmistenit.kadonneet.placeholder.PlaceholderContent
 /**
  * A fragment representing a list of Items.
  */
-class PostItemFragment : Fragment() {
+class UserAdvertListFragment : Fragment() {
 
     private var columnCount = 1
 
@@ -29,7 +29,7 @@ class PostItemFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_post_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_user_advert_list, container, false)
 
         // Set the adapter
         if (view is RecyclerView) {
@@ -38,7 +38,7 @@ class PostItemFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = PostRecyclerViewAdapter(PlaceholderContent.ITEMS)
+                adapter = UserAdvertRecyclerViewAdapter(PlaceholderContent.ITEMS)
             }
         }
         return view
@@ -52,7 +52,7 @@ class PostItemFragment : Fragment() {
         // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
-            PostItemFragment().apply {
+            UserAdvertListFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_COLUMN_COUNT, columnCount)
                 }

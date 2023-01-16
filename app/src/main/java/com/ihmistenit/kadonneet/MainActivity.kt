@@ -3,18 +3,19 @@ package com.ihmistenit.kadonneet
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -30,15 +31,70 @@ class MainActivity : AppCompatActivity() {
     lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+    private fun initUserAdvertListFragment() {
+        val name = UserAdvertListFragment::class.java.name
+        if (supportFragmentManager.findFragmentByTag(name) == null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.tabContentFragContainer, UserAdvertListFragment(), name)
+                .addToBackStack(name)
+                .commit()
+        }
+    }
+
+    private fun initMapsFragment() {
+        val name = MapsFragment::class.java.name
+        if (supportFragmentManager.findFragmentByTag(name) == null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.tabContentFragContainer, MapsFragment(), name)
+                .addToBackStack(name)
+                .commit()
+        }
+    }
+
+    private fun initTabs() {
+        val tabLayout = binding.tabs
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_text_1)))
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_text_2)))
+        tabLayout.tabGravity = TabLayout.GRAVITY_FILL
+        tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                if (tabLayout.selectedTabPosition == 0) {
+                    val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+                    val frag: Fragment? = supportFragmentManager.findFragmentByTag(UserAdvertListFragment::class.java.name)
+                    if (frag != null) {
+                        ft.replace(R.id.tabContentFragContainer, frag).commit()
+                    }
+                } else if (tabLayout.selectedTabPosition == 1) {
+                    val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+                    val frag: Fragment? = supportFragmentManager.findFragmentByTag(MapsFragment::class.java.name)
+                    if (frag != null) {
+                        ft.replace(R.id.tabContentFragContainer, frag).commit()
+                    } else initMapsFragment()
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Default fragment
-        val ftr: FragmentTransaction = supportFragmentManager.beginTransaction()
-        ftr.replace(R.id.tabContentFragmentPlaceholder, PostItemFragment()).commit()
+        initUserAdvertListFragment()
+
+        val test = supportFragmentManager.findFragmentByTag(UserAdvertListFragment.javaClass.simpleName)
+        if (test == null) println("elontusk")
+
+        val userAdvertRecyclerView: RecyclerView? = supportFragmentManager.findFragmentById(R.id.tabContentFragContainer)?.view?.findViewById(R.id.user_advert_recyclerview)
+        if (userAdvertRecyclerView != null) {
+            userAdvertRecyclerView.setOnClickListener(View.OnClickListener {
+                println("Hello!")
+            })
+        } else println("MainActivity.kt: Couldn't find userAdvertRecyclerView (Is it not occupying the tabContentFragmentPlaceholder at the moment?)")
 
         val toolbar: Toolbar = binding.drawerLayout.findViewById(R.id.toolbar)
 
@@ -52,7 +108,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val fab: FloatingActionButton = binding.fab
-
+        fab.bringToFront()
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
@@ -69,26 +125,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        // Setup tabs
-        val tabLayout = binding.tabs
-        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_text_1)))
-        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_text_2)))
-        tabLayout.tabGravity = TabLayout.GRAVITY_FILL
-
-        tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                if (tabLayout.selectedTabPosition == 0) {
-                    val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-                    ft.replace(R.id.tabContentFragmentPlaceholder, PostItemFragment()).commit()
-                } else if (tabLayout.selectedTabPosition == 1) {
-                    val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-                    ft.replace(R.id.tabContentFragmentPlaceholder, MapsFragment()).commit()
-                }
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {}
-            override fun onTabReselected(tab: TabLayout.Tab) {}
-        })
+        initTabs()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
