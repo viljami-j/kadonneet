@@ -1,10 +1,10 @@
-package com.ihmistenit.kadonneet.ui.slideshow
+package com.ihmistenit.kadonneet.ui.report_finding
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SlideshowViewModel : ViewModel() {
+class ReportFindingViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is slideshow Fragment"
