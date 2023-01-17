@@ -16,7 +16,6 @@ class UserAdvertRecyclerViewAdapter(
 ) : RecyclerView.Adapter<UserAdvertRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
         return ViewHolder(
             FragmentUserAdvertItemBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -24,7 +23,6 @@ class UserAdvertRecyclerViewAdapter(
                 false
             )
         )
-
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -40,7 +38,7 @@ class UserAdvertRecyclerViewAdapter(
         val advertPostDateView: TextView = binding.advertPostdate
 
         override fun toString(): String {
-            return super.toString() + " '" + advertTitleView.text + "'"
+            return super.toString() + " '" + advertTitleView.text + "'" + advertPostDateView.text
         }
     }
 
