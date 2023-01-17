@@ -7,19 +7,29 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.ihmistenit.kadonneet.UserAdvertsFragment"
+        android:name="com.ihmistenit.kadonneet.ui.user_advert.UserAdvertsFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_user_adverts" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.ihmistenit.kadonneet.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_my_adverts"
+        android:name="com.ihmistenit.kadonneet.ui.my_adverts.GalleryFragment"
+        android:label="@string/menu_my_adverts"
+        tools:layout="@layout/fragment_my_adverts" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
+        android:id="@+id/nav_report_finding"
         android:name="com.ihmistenit.kadonneet.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
+        android:label="@string/menu_report_finding"
         tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_feedback"
+        android:name="com.ihmistenit.kadonneet.ui.feedback.FeedbackFragment"
+        android:label="fragment_feedback"
+        tools:layout="@layout/fragment_feedback" />
+    <fragment
+        android:id="@+id/nav_account"
+        android:name="com.ihmistenit.kadonneet.ui.account.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 </navigation>

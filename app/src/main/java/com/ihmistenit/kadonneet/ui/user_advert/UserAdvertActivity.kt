@@ -1,7 +1,8 @@
-package com.ihmistenit.kadonneet
+package com.ihmistenit.kadonneet.ui.user_advert
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.ihmistenit.kadonneet.R
 
 class UserAdvertActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

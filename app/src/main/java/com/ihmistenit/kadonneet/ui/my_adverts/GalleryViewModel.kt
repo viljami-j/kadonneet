@@ -1,4 +1,4 @@
-package com.ihmistenit.kadonneet.ui.gallery
+package com.ihmistenit.kadonneet.ui.my_adverts
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

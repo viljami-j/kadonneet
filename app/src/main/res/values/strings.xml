@@ -4,18 +4,19 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="tab_text_1">Ilmoitukset</string>
     <string name="tab_text_2">Kartalla</string>
-    <string name="title_activity_drawer_layout">drawerLayoutActivity</string>
-    <string name="nav_open">Open navigation drawer</string>
-    <string name="nav_close">Close navigation drawer</string>
-    <string name="nav_header_title">Matti Maalainen</string>
+    <string name="nav_header_title">Matti Meikäläinen</string>
     <string name="nav_header_subtitle">4 lukematonta viestiä</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
     <string name="menu_home">Koti</string>
-    <string name="menu_gallery">Omat ilmoitukset</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_feedback">Kehityspalaute</string>
+    <string name="menu_my_adverts">Ilmoitukset</string>
+    <string name="menu_report_finding">Havainto</string>
+    <string name="menu_feedback">Palaute</string>
+    <string name="menu_account">Tili</string>
+    <string name="menu_feedback_text">
+        Otamme kehityspalautteen hyvin vakavasti ja pyrimme käsittelemään sen nopealla aikataululla.
+        Sovelluksen takana on yksi ihminen, joten olethan kärsivällinen.
+    </string>
 
     <string name="large_text">
         "Material is the metaphor.\n\n"
@@ -108,4 +109,13 @@
     </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
 </resources>

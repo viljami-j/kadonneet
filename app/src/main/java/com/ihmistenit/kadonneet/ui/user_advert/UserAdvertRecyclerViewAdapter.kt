@@ -1,4 +1,4 @@
-package com.ihmistenit.kadonneet
+package com.ihmistenit.kadonneet.ui.user_advert
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater

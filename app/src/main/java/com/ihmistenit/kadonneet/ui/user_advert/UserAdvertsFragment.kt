@@ -1,4 +1,4 @@
-package com.ihmistenit.kadonneet
+package com.ihmistenit.kadonneet.ui.user_advert
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +9,8 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
+import com.ihmistenit.kadonneet.R
+import com.ihmistenit.kadonneet.ui.maps.MapsFragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

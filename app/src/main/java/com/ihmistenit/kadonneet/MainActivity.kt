@@ -1,30 +1,23 @@
 package com.ihmistenit.kadonneet
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.widget.Toolbar
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.navigation.NavigationView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ihmistenit.kadonneet.databinding.ActivityMainBinding
+import com.ihmistenit.kadonneet.ui.user_advert.UserAdvertListFragment
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    lateinit var drawerLayout: DrawerLayout
-    lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,42 +38,14 @@ class MainActivity : AppCompatActivity() {
             })
         } else println("MainActivity.kt: Couldn't find userAdvertRecyclerView (Is it not occupying the tabContentFragmentPlaceholder at the moment?)")
 
-        val toolbar: Toolbar = binding.drawerLayout.findViewById(R.id.toolbar)
-
-        drawerLayout = findViewById(R.id.drawer_layout)
-        actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar,  R.string.nav_open, R.string.nav_close)
-        setSupportActionBar(toolbar)
-        drawerLayout.addDrawerListener(actionBarDrawerToggle)
-        actionBarDrawerToggle.syncState()
-
-        // to make the Navigation drawer icon always appear on the action bar
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        val drawerLayout: DrawerLayout = binding.drawerLayout
-        val navView: NavigationView = findViewById(R.id.nav_view)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_app_bar) as NavHostFragment
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
-            ), drawerLayout
-        )
-        setupActionBarWithNavController(navHostFragment.navController, appBarConfiguration)
+        // Setup bottom navigation
+        val navView: BottomNavigationView = binding.bottomNavView
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_bottom_nav) as NavHostFragment
         navView.setupWithNavController(navHostFragment.navController)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (actionBarDrawerToggle.onOptionsItemSelected(item)) true
-        else super.onOptionsItemSelected(item)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.drawer_layout, menu)
-        return true
-    }
-
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_app_bar)
+        val navController = findNavController(R.id.nav_host_fragment_bottom_nav)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }

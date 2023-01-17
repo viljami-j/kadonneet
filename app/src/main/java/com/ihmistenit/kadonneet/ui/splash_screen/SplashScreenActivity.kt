@@ -1,8 +1,9 @@
-package com.ihmistenit.kadonneet
+package com.ihmistenit.kadonneet.ui.splash_screen
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.ihmistenit.kadonneet.MainActivity
 
 
 class SplashScreenActivity : AppCompatActivity() {
