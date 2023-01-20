@@ -14,7 +14,8 @@
     <string name="menu_feedback">Palaute</string>
     <string name="menu_settings">Asetukset</string>
     <string name="menu_feedback_text">
-        Otamme kehityspalautteen hyvin vakavasti ja pyrimme käsittelemään sen nopealla aikataululla.
+        Otamme kehityspalautteen hyvin vakavasti - siksi palauteosio on hyvin esillä.
+        Pyrimme käsittelemään ne nopealla aikataululla.
         Sovelluksen takana on yksi ihminen, joten olethan kärsivällinen.
     </string>
 
