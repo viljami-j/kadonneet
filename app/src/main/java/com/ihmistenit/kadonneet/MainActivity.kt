@@ -26,7 +26,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        // TODO: Add a preference (Follow system, light, dark)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 
         val test = supportFragmentManager.findFragmentByTag(UserAdvertListFragment::class.java.name)
         if (test == null) println("elontusk")
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.bottomNavView
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_bottom_nav) as NavHostFragment
         navView.setupWithNavController(navHostFragment.navController)
+        navView.bringToFront()
     }
 
     override fun onSupportNavigateUp(): Boolean {
