@@ -103,13 +103,6 @@ class UserAdvertsFragment : Fragment() {
 
         initTabs(tabs)
         syncToSelectedTab(tabs)
-
-        val fab: FloatingActionButton = rootView.findViewById(R.id.fab)
-        fab.bringToFront()
-        fab.setOnClickListener {
-            Snackbar.make(rootView, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
     }
 
     companion object {
