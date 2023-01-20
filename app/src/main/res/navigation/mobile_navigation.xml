@@ -28,8 +28,7 @@
         android:label="fragment_feedback"
         tools:layout="@layout/fragment_feedback" />
     <fragment
-        android:id="@+id/nav_account"
-        android:name="com.ihmistenit.kadonneet.ui.account.ui.login.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        android:id="@+id/nav_settings"
+        android:name="com.ihmistenit.kadonneet.ui.settings.SettingsFragment"
+        android:label="fragment_settings" />
 </navigation>

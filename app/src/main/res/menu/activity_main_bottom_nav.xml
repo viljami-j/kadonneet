@@ -17,12 +17,12 @@
             android:icon="@drawable/ic_menu_report_finding"
             android:title="@string/menu_report_finding" />
         <item
-            android:id="@+id/nav_account"
-            android:icon="@drawable/ic_menu_account"
-            android:title="@string/menu_account" />
-        <item
             android:id="@+id/nav_feedback"
             android:icon="@drawable/ic_menu_feedback"
             android:title="@string/menu_feedback" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_menu_settings"
+            android:title="@string/menu_settings" />
     </group>
 </menu>
