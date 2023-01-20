@@ -15,6 +15,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/tabs_viewpager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <FrameLayout
         android:id="@+id/tabContentFragContainer"
         android:layout_width="0dp"
@@ -22,6 +29,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabs"></FrameLayout>
+        app:layout_constraintTop_toBottomOf="@+id/tabs">
+
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

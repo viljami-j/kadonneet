@@ -4,15 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.add
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.ihmistenit.kadonneet.R
 import com.ihmistenit.kadonneet.databinding.FragmentMyAdvertsBinding
-import com.ihmistenit.kadonneet.ui.maps.MapsFragment
 import com.ihmistenit.kadonneet.ui.user_advert.UserAdvertListFragment
 
 class MyAdvertsFragment : Fragment() {

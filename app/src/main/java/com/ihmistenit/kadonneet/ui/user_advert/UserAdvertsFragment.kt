@@ -6,9 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentTransaction
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.ihmistenit.kadonneet.R
 import com.ihmistenit.kadonneet.ui.maps.MapsFragment
 
@@ -27,6 +26,8 @@ class UserAdvertsFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var rootView: View
+    private lateinit var tabs: TabLayout
+    private var selectedTab: Int = 0
 
     private fun initUserAdvertListFragment() {
         val name = UserAdvertListFragment::class.java.name
@@ -48,13 +49,14 @@ class UserAdvertsFragment : Fragment() {
         }
     }
 
-    private fun initTabs(tabLayout: TabLayout) {
-        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_text_1)))
-        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_text_2)))
-        tabLayout.tabGravity = TabLayout.GRAVITY_FILL
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+    private fun initTabs() {
+        tabs.addTab(tabs.newTab().setText(getString(R.string.tab_text_1)))
+        tabs.addTab(tabs.newTab().setText(getString(R.string.tab_text_2)))
+        tabs.tabGravity = TabLayout.GRAVITY_FILL
+        tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                syncToSelectedTab(tabLayout)
+                selectedTab = tabs.selectedTabPosition
+                syncToSelectedTab()
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {}
@@ -62,14 +64,15 @@ class UserAdvertsFragment : Fragment() {
         })
     }
 
-    private fun syncToSelectedTab(tabLayout: TabLayout) {
-        if (tabLayout.selectedTabPosition == 0) {
+    private fun syncToSelectedTab() {
+        tabs.selectTab(tabs.getTabAt(selectedTab))
+        if (selectedTab == 0) {
             val ft: FragmentTransaction = childFragmentManager.beginTransaction()
             val frag: Fragment? = childFragmentManager.findFragmentByTag(UserAdvertListFragment::class.java.name)
             if (frag != null) {
                 ft.replace(R.id.tabContentFragContainer, frag).commit()
             } else initUserAdvertListFragment()
-        } else if (tabLayout.selectedTabPosition == 1) {
+        } else if (selectedTab == 1) {
             val ft: FragmentTransaction = childFragmentManager.beginTransaction()
             val frag: Fragment? = childFragmentManager.findFragmentByTag(MapsFragment::class.java.name)
             if (frag != null) {
@@ -98,11 +101,17 @@ class UserAdvertsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        tabs = rootView.findViewById(R.id.tabs)
+
+        initTabs()
+        syncToSelectedTab()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
 
         val tabs: TabLayout = rootView.findViewById(R.id.tabs)
-
-        initTabs(tabs)
-        syncToSelectedTab(tabs)
+        selectedTab = tabs.selectedTabPosition
     }
 
     companion object {
