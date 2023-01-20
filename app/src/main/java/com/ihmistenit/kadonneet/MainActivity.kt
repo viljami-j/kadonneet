@@ -11,6 +11,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.ihmistenit.kadonneet.databinding.ActivityMainBinding
 import com.ihmistenit.kadonneet.ui.user_advert.UserAdvertListFragment
 
@@ -25,9 +27,6 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        // TODO: Add a preference (Follow system, light, dark)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 
         val test = supportFragmentManager.findFragmentByTag(UserAdvertListFragment::class.java.name)
         if (test == null) println("elontusk")
@@ -44,6 +43,18 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_bottom_nav) as NavHostFragment
         navView.setupWithNavController(navHostFragment.navController)
         navView.bringToFront()
+
+        // Setup report finding fab
+        val fab: FloatingActionButton? = binding?.fabReportFinding ?: null
+        if (fab != null) {
+            fab.bringToFront()
+            fab.setOnClickListener {
+                Snackbar.make(binding.root, "Replace with your own action", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

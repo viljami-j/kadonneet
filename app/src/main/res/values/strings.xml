@@ -4,9 +4,6 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="tab_text_1">Ilmoitukset</string>
     <string name="tab_text_2">Kartalla</string>
-    <string name="nav_header_title">Matti Meikäläinen</string>
-    <string name="nav_header_subtitle">4 lukematonta viestiä</string>
-    <string name="nav_header_desc">Navigation header</string>
 
     <string name="menu_home">Koti</string>
     <string name="menu_my_adverts">Ilmoitukset</string>
@@ -111,12 +108,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
+    <string name="customization_header">Ulkoasu</string>
     <string name="sync_header">Sync</string>
 
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <string name="theme_title">Oletusteema</string>
 
     <!-- Sync Preferences -->
     <string name="sync_title">Sync email periodically</string>
