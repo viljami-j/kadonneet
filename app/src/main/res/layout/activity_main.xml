@@ -53,7 +53,8 @@
             app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/activity_main_bottom_nav" />
+            app:menu="@menu/activity_main_bottom_nav"
+            app:elevation="1dp"/>
 
         <!-- Icon size can be adjusted via maxImageSize -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -68,7 +69,8 @@
             app:backgroundTint="@color/orange"
             app:borderWidth="0dp"
             app:layout_anchor="@id/bottomAppBar"
-            app:useCompatPadding="true" />
+            app:useCompatPadding="true"
+            app:elevation="3dp"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
