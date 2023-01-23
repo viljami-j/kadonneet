@@ -29,9 +29,8 @@ class MyAdvertsFragment : Fragment() {
             ViewModelProvider(this)[MyAdvertsViewModel::class.java]
 
         _binding = FragmentMyAdvertsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,7 +43,7 @@ class MyAdvertsFragment : Fragment() {
                 .commit()
         }
 
-        val fab: FloatingActionButton? = _binding?.fab ?: null
+        val fab: FloatingActionButton? = _binding?.fabAddAd
         if (fab != null) {
             fab.bringToFront()
             fab.setOnClickListener {
