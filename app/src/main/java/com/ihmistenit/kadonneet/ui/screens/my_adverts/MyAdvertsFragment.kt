@@ -1,4 +1,4 @@
-package com.ihmistenit.kadonneet.ui.my_adverts
+package com.ihmistenit.kadonneet.ui.screens.my_adverts
 
 import android.os.Bundle
 import android.view.LayoutInflater

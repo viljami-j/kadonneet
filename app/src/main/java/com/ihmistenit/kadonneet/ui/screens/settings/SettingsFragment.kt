@@ -1,4 +1,4 @@
-package com.ihmistenit.kadonneet.ui.settings
+package com.ihmistenit.kadonneet.ui.screens.settings
 
 import android.os.Bundle
 import android.view.View

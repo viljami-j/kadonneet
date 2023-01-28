@@ -1,4 +1,4 @@
-package com.ihmistenit.kadonneet.ui.report_finding
+package com.ihmistenit.kadonneet.ui.screens.report_finding
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

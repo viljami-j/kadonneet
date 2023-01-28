@@ -1,4 +1,4 @@
-package com.ihmistenit.kadonneet.ui.splash_screen
+package com.ihmistenit.kadonneet.ui.screens.splash_screen
 
 import android.content.Intent
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.ihmistenit.kadonneet.ui.feedback
+package com.ihmistenit.kadonneet.ui.screens.feedback
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.ihmistenit.kadonneet.ui.home
+package com.ihmistenit.kadonneet.ui.screens.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
