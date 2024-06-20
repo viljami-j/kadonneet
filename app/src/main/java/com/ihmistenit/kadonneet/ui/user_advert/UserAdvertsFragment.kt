@@ -22,64 +22,11 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class UserAdvertsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var rootView: View
     private lateinit var tabs: TabLayout
     private var selectedTab: Int = 0
-
-    private fun initUserAdvertListFragment() {
-        val name = UserAdvertListFragment::class.java.name
-        if (childFragmentManager.findFragmentByTag(name) == null) {
-            childFragmentManager.beginTransaction()
-                .add(R.id.tabContentFragContainer, UserAdvertListFragment(), name)
-                .addToBackStack(name)
-                .commit()
-        }
-    }
-
-    private fun initMapsFragment() {
-        val name = MapsFragment::class.java.name
-        if (childFragmentManager.findFragmentByTag(name) == null) {
-            childFragmentManager.beginTransaction()
-                .add(R.id.tabContentFragContainer, MapsFragment(), name)
-                .addToBackStack(name)
-                .commit()
-        }
-    }
-
-    private fun initTabs() {
-        tabs.addTab(tabs.newTab().setText(getString(R.string.tab_text_1)))
-        tabs.addTab(tabs.newTab().setText(getString(R.string.tab_text_2)))
-        tabs.tabGravity = TabLayout.GRAVITY_FILL
-        tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                selectedTab = tabs.selectedTabPosition
-                syncToSelectedTab()
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {}
-            override fun onTabReselected(tab: TabLayout.Tab) {}
-        })
-    }
-
-    private fun syncToSelectedTab() {
-        tabs.selectTab(tabs.getTabAt(selectedTab))
-        if (selectedTab == 0) {
-            val ft: FragmentTransaction = childFragmentManager.beginTransaction()
-            val frag: Fragment? = childFragmentManager.findFragmentByTag(UserAdvertListFragment::class.java.name)
-            if (frag != null) {
-                ft.replace(R.id.tabContentFragContainer, frag).commit()
-            } else initUserAdvertListFragment()
-        } else if (selectedTab == 1) {
-            val ft: FragmentTransaction = childFragmentManager.beginTransaction()
-            val frag: Fragment? = childFragmentManager.findFragmentByTag(MapsFragment::class.java.name)
-            if (frag != null) {
-                ft.replace(R.id.tabContentFragContainer, frag).commit()
-            } else initMapsFragment()
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -132,5 +79,57 @@ class UserAdvertsFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun initUserAdvertListFragment() {
+        val name = UserAdvertListFragment::class.java.name
+        if (childFragmentManager.findFragmentByTag(name) == null) {
+            childFragmentManager.beginTransaction()
+                .add(R.id.tabContentFragContainer, UserAdvertListFragment(), name)
+                .addToBackStack(name)
+                .commit()
+        }
+    }
+
+    private fun initMapsFragment() {
+        val name = MapsFragment::class.java.name
+        if (childFragmentManager.findFragmentByTag(name) == null) {
+            childFragmentManager.beginTransaction()
+                .add(R.id.tabContentFragContainer, MapsFragment(), name)
+                .addToBackStack(name)
+                .commit()
+        }
+    }
+
+    private fun initTabs() {
+        tabs.addTab(tabs.newTab().setText(getString(R.string.tab_text_1)))
+        tabs.addTab(tabs.newTab().setText(getString(R.string.tab_text_2)))
+        tabs.tabGravity = TabLayout.GRAVITY_FILL
+        tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                selectedTab = tabs.selectedTabPosition
+                syncToSelectedTab()
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
+    }
+
+    private fun syncToSelectedTab() {
+        tabs.selectTab(tabs.getTabAt(selectedTab))
+        if (selectedTab == 0) {
+            val ft: FragmentTransaction = childFragmentManager.beginTransaction()
+            val frag: Fragment? = childFragmentManager.findFragmentByTag(UserAdvertListFragment::class.java.name)
+            if (frag != null) {
+                ft.replace(R.id.tabContentFragContainer, frag).commit()
+            } else initUserAdvertListFragment()
+        } else if (selectedTab == 1) {
+            val ft: FragmentTransaction = childFragmentManager.beginTransaction()
+            val frag: Fragment? = childFragmentManager.findFragmentByTag(MapsFragment::class.java.name)
+            if (frag != null) {
+                ft.replace(R.id.tabContentFragContainer, frag).commit()
+            } else initMapsFragment()
+        }
     }
 }

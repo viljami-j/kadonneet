@@ -1,11 +1,11 @@
 package com.ihmistenit.kadonneet.ui.user_advert
 
+import android.graphics.Bitmap
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
-
-import com.ihmistenit.kadonneet.placeholder.PlaceholderContent.UserAdvertItem
 import com.ihmistenit.kadonneet.databinding.FragmentUserAdvertItemBinding
 
 /**
@@ -27,7 +27,9 @@ class UserAdvertRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.advertTitleView.text = item.advertTitle
+        holder.advertTitleView.text = item.title
+        holder.advertPostDateView.text = item.postDate
+        holder.advertImage.setImageBitmap(item.image)
     }
 
     override fun getItemCount(): Int = values.size
@@ -36,10 +38,15 @@ class UserAdvertRecyclerViewAdapter(
         RecyclerView.ViewHolder(binding.root) {
         val advertTitleView: TextView = binding.advertTitle
         val advertPostDateView: TextView = binding.advertPostdate
+        val advertImage: ImageView = binding.advertImage
 
         override fun toString(): String {
             return super.toString() + " '" + advertTitleView.text + "'" + advertPostDateView.text
         }
     }
 
+}
+
+data class UserAdvertItem(val id: String, val title: String, val image: Bitmap?, val postDate: String) {
+    override fun toString(): String = title
 }
